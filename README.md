@@ -3,6 +3,8 @@
 Single page application with React, initialized with create-react-app.
 Fetches products information, displays them in a grid and simulates a user's cart with cart management and credit system.
 
+[Deployed Application (Netlify)](https://tranquil-griffin-90bf31.netlify.app/)
+
 ## Tech Stack
 
 - Typescript
@@ -18,6 +20,10 @@ Fetches products information, displays them in a grid and simulates a user's car
 ## CORS error & solution
 
 The endpoint for blocks / product information is CORS enabled, and therefore it's not possible to make calls from the browser. To workaround this issue, I have deployed my own cors-anywhere instance to use as a server in-between the browser and the server. The heroku instance can be found in the URL the fetch requests are sent to.
+
+## Zero priced products
+
+The zero priced may be changed to have a random price by uncommenting Math.random() snippet in the api.ts file.
 
 #### There may be randomly failing requests due to this, and should produce a successful response after a few tries.
 
