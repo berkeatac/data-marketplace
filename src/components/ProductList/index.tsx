@@ -4,9 +4,11 @@ import ProductCard from "../ProductCard";
 
 interface IProps {
   products: Product[];
+  cart: Product[];
+  setCart: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
-const ProductList: React.FC<IProps> = ({ products }) => {
+const ProductList: React.FC<IProps> = ({ products, cart, setCart }) => {
   return (
     <SimpleGrid
       h="full"
@@ -17,8 +19,15 @@ const ProductList: React.FC<IProps> = ({ products }) => {
       overflow="scroll"
       overflowX="hidden"
     >
-      {products?.map(({ title, price }) => (
-        <ProductCard title={title} price={price} />
+      {products?.map(({ title, price, id }) => (
+        <ProductCard
+          id={id}
+          title={title}
+          price={price}
+          key={id}
+          cart={cart}
+          setCart={setCart}
+        />
       ))}
     </SimpleGrid>
   );

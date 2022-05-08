@@ -1,4 +1,5 @@
 export interface Product {
+  id: string;
   title: string;
   price: number;
 }
@@ -16,6 +17,7 @@ interface ResponseItem {
       credits: number;
     };
   };
+  id: string;
 }
 
 const fetchData: () => Promise<any> = () => {
@@ -36,6 +38,7 @@ const filterAndFormatData = ({ data }: Response) => {
     return {
       title: filteredData.displayName,
       price: filteredData.metadata.blockPricingStrategy.credits,
+      id: filteredData.id,
     };
   });
 
