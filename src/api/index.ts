@@ -32,7 +32,11 @@ const fetchData: () => Promise<any> = () => {
   });
 };
 
-const filterAndFormatData = ({ data }: Response) => {
+const filterAndFormatData = ({ data, error }: Response) => {
+  if (error) {
+    throw new Error("Unable to fetch products data");
+  }
+
   const filteredData = data.filter(
     ({
       metadata: {
