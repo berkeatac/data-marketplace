@@ -21,10 +21,6 @@ function App() {
       .catch((error) => setError(error));
   }, []);
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-
   if (error) {
     return (
       <Center h="100vh" w="100vw">
@@ -34,7 +30,7 @@ function App() {
   }
 
   return (
-    <VStack spacing={0} h="100vh" w="100vw">
+    <VStack spacing={0} h="100vh" w="100vw" overflow="hidden">
       {loading ? (
         <Center h="full">
           <Spinner></Spinner>
