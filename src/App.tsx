@@ -1,6 +1,7 @@
 import { VStack, Box, HStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getProductList, Product } from "./api";
+import CartContainer from "./components/CartContainer";
 import ProductList from "./components/ProductList";
 import TopBar from "./components/TopBar";
 
@@ -20,7 +21,7 @@ function App() {
       <TopBar credits={10000} />
       <HStack spacing={0} h="calc(100vh - 80px)" w="100vw">
         <ProductList products={products} />
-        <Box h="full" w="420px" bg="pink.100"></Box>
+        <CartContainer />
       </HStack>
     </VStack>
   );

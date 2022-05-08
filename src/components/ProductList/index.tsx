@@ -15,6 +15,7 @@ const ProductList: React.FC<IProps> = ({ products }) => {
       spacing={4}
       p={4}
       overflow="scroll"
+      overflowX="hidden"
     >
       {products?.map(({ title, price }) => (
         <ProductCard title={title} price={price} />
