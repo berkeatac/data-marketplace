@@ -33,7 +33,7 @@ function App() {
     <VStack spacing={0} h="100vh" w="100vw" overflow="hidden">
       {loading ? (
         <Center h="full">
-          <Spinner></Spinner>
+          <Spinner data-testid="loading"></Spinner>
         </Center>
       ) : (
         <>
