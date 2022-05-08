@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { fetchData } from "./api";
+import { getProductList, Product } from "./api";
 
 function App() {
+  const [products, setProducts] = useState<Product[]>([]);
+
   useEffect(() => {
-    fetchData().then(({ data }) => console.log(data));
+    getProductList().then((data) => setProducts(data));
   }, []);
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   return (
     <div className="App">
