@@ -29,6 +29,7 @@ const ProductCard: React.FC<IProps> = ({ id, title, price, cart, setCart }) => {
           !cart.some((product) => product.id === id) &&
           setCart((cart) => [...cart, { id, title, price }])
         }
+        disabled={cart.some((product) => product.id === id)}
       >
         Add to cart
       </Button>

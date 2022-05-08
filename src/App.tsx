@@ -1,4 +1,4 @@
-import { VStack, HStack } from "@chakra-ui/react";
+import { VStack, HStack, Center, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getProductList, Product } from "./api";
 import CartContainer from "./components/CartContainer";
@@ -8,9 +8,14 @@ import TopBar from "./components/TopBar";
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
+  const [credit, setCredit] = useState(10000);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProductList().then((data) => setProducts(data));
+    getProductList().then((data) => {
+      setProducts(data);
+      setLoading(false);
+    });
   }, []);
 
   useEffect(() => {
@@ -19,11 +24,24 @@ function App() {
 
   return (
     <VStack spacing={0} h="100vh" w="100vw">
-      <TopBar credits={10000} />
-      <HStack spacing={0} h="calc(100vh - 80px)" w="100vw">
-        <ProductList products={products} cart={cart} setCart={setCart} />
-        <CartContainer cart={cart} setCart={setCart} />
-      </HStack>
+      {loading ? (
+        <Center h="full">
+          <Spinner></Spinner>
+        </Center>
+      ) : (
+        <>
+          <TopBar credit={credit} />
+          <HStack spacing={0} h="calc(100vh - 80px)" w="100vw">
+            <ProductList products={products} cart={cart} setCart={setCart} />
+            <CartContainer
+              cart={cart}
+              setCart={setCart}
+              credit={credit}
+              setCredit={setCredit}
+            />
+          </HStack>
+        </>
+      )}
     </VStack>
   );
 }

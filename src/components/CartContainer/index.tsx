@@ -6,12 +6,16 @@ import {
   HStack,
   Spacer,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { Product } from "../../api";
+import { useMemo } from "react";
 
 interface IProps {
   cart: Product[];
   setCart: React.Dispatch<React.SetStateAction<Product[]>>;
+  credit: number;
+  setCredit: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface CartItemProps extends Product {
@@ -42,7 +46,19 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, price, setCart }) => {
   );
 };
 
-const CartContainer: React.FC<IProps> = ({ cart, setCart }) => {
+const CartContainer: React.FC<IProps> = ({
+  cart,
+  setCart,
+  credit,
+  setCredit,
+}) => {
+  const toast = useToast();
+
+  const cartAmount = useMemo(
+    () => cart.reduce((prev, cur) => prev + cur.price, 0),
+    [cart]
+  );
+
   return (
     <VStack
       h="full"
@@ -79,11 +95,30 @@ const CartContainer: React.FC<IProps> = ({ cart, setCart }) => {
           <Text fontSize="lg">Total:</Text>
           <Spacer />
           <Text fontSize="lg" fontWeight="bold">
-            {cart.reduce((prev, cur) => prev + cur.price, 0)}
+            {cartAmount}
           </Text>
         </HStack>
         <Spacer />
-        <Button w="full">Buy now</Button>
+        <Button
+          w="full"
+          onClick={() => {
+            if (credit > cartAmount) {
+              setCredit((credit) => credit - cartAmount);
+              setCart([]);
+            } else {
+              toast({
+                title: "Insufficient credit",
+                description: "Remove items from cart",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              });
+            }
+          }}
+          disabled={cart.length < 1}
+        >
+          Buy now
+        </Button>
       </VStack>
     </VStack>
   );

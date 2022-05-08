@@ -1,10 +1,10 @@
 import { HStack, Spacer, Text } from "@chakra-ui/react";
 
 interface IProps {
-  credits: number;
+  credit: number;
 }
 
-const TopBar: React.FC<IProps> = ({ credits }) => {
+const TopBar: React.FC<IProps> = ({ credit }) => {
   return (
     <HStack h="80px" w="100vw" borderWidth="1px">
       <Spacer />
@@ -13,7 +13,7 @@ const TopBar: React.FC<IProps> = ({ credits }) => {
           Credits:
         </Text>
         <Text fontWeight="bold" pr="290px" fontSize="lg">
-          {credits}
+          {credit}
         </Text>
       </HStack>
     </HStack>
