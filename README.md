@@ -3,6 +3,8 @@
 Single page application with React, initialized with create-react-app.
 Fetches products information, displays them in a grid and simulates a user's cart with cart management and credit system.
 
+### There may be randomly failing requests due to cors issue & workaround. They should produce a successful response after a few tries.
+
 [Deployed Application (Netlify)](https://tranquil-griffin-90bf31.netlify.app/)
 
 ## Tech Stack
@@ -24,8 +26,6 @@ The endpoint for blocks / product information is CORS enabled, and therefore it'
 ## Zero priced products
 
 The zero priced may be changed to have a random price by uncommenting Math.random() snippet in the api.ts file.
-
-#### There may be randomly failing requests due to this, and should produce a successful response after a few tries.
 
 ## Responsiveness
 
