@@ -23,7 +23,13 @@ interface ResponseItem {
 const fetchData: () => Promise<any> = () => {
   return fetch(
     "https://evening-ravine-34356.herokuapp.com/https://api.up42.com/marketplace/blocks"
-  ).then((response) => response.json());
+  ).then((response) => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error("Unable to fetch products data");
+    }
+  });
 };
 
 const filterAndFormatData = ({ data }: Response) => {
@@ -38,6 +44,9 @@ const filterAndFormatData = ({ data }: Response) => {
     return {
       title: filteredData.displayName,
       price: filteredData.metadata.blockPricingStrategy.credits,
+      // This part would fill randomly set prices to products with 0 price
+      // ? filteredData.metadata.blockPricingStrategy.credits
+      // : Math.round(Math.random() * 100) * 20,
       id: filteredData.id,
     };
   });

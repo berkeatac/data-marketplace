@@ -10,17 +10,28 @@ function App() {
   const [cart, setCart] = useState<Product[]>([]);
   const [credit, setCredit] = useState(10000);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<{ message: string } | null>(null);
 
   useEffect(() => {
-    getProductList().then((data) => {
-      setProducts(data);
-      setLoading(false);
-    });
+    getProductList()
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((error) => setError(error));
   }, []);
 
   useEffect(() => {
     console.log(products);
   }, [products]);
+
+  if (error) {
+    return (
+      <Center h="100vh" w="100vw">
+        {error.message}
+      </Center>
+    );
+  }
 
   return (
     <VStack spacing={0} h="100vh" w="100vw">
