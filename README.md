@@ -19,6 +19,8 @@ Fetches products information, displays them in a grid and simulates a user's car
 
 The endpoint for blocks / product information is CORS enabled, and therefore it's not possible to make calls from the browser. To workaround this issue, I have deployed my own cors-anywhere instance to use as a server in-between the browser and the server. The heroku instance can be found in the URL the fetch requests are sent to.
 
+#### There may be randomly failing requests due to this, and should produce a successful response after a few tries.
+
 ## Responsiveness
 
 The application is fully responsive in devices of all sizes and works in every major browser.
